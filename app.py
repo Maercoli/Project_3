@@ -38,24 +38,19 @@ db = SQLAlchemy(app)
 
 #Pet = create_classes(db)
 
-    cursor = db.cursor()
-    result = cursor.fetchall()
-    for i in range(len(result)):
-        print(result[i])
-
 # create route that renders index.html template
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-@app.route("/api/main/torontocovidcases")
-def firstRoute(): 
+#@app.route("/api/main/torontocovidcases")
+#def firstRoute(): 
     #data = db.session.query(Cases.City, Cases.Count).filter(Cases.city =="Toronto").all()
 #    return jsonify(data)
 
-    if __name__ == "__main__":
-    app.run()
+#    if __name__ == "__main__":
+#    app.run()
 
 
 
