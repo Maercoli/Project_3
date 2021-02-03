@@ -1,6 +1,7 @@
 # import necessary libraries
 from models import create_classes
 import os
+import pandas as pd
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
@@ -31,7 +32,10 @@ engine = create_engine('postgres://xbrqktwe:E_nywn4IJhz89kqxwG3M498kv8qnq4Z6@raj
 
 Base = automap_base()
 Base.prepare(engine, reflect=True)
-#summary = Base.classes.summary
+
+#set all tables to variables
+CovidCases_On=Base.classes.CovidCases_On
+
 session = Session(engine)
 
 db = SQLAlchemy(app)
@@ -42,6 +46,23 @@ db = SQLAlchemy(app)
 @app.route("/")
 def home():
     return render_template("index.html")
+
+
+@app.route("/api/v1/data")
+def get_data():
+    result=pd.read_sql('select * from "CovidCases_On";', engine)
+    result_dict=result.to_dict(orient='list')
+    return jsonify(result_dict)
+
+@app.route("/api/v1/dataX")
+def get_dataX():
+    result=session.query(CovidCases_On).all()
+    result_dict=[]
+    for i in result:
+        single_dict={}
+        single_dict[i.Date]=i.Number_of_Cases
+        result_dict.append(single_dict)
+    return jsonify(result_dict)
 
 
 #@app.route("/api/main/torontocovidcases")
