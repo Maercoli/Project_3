@@ -1,5 +1,4 @@
 # import necessary libraries
-from models import create_classes
 import os
 import pandas as pd
 import sqlalchemy
@@ -48,11 +47,11 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/api/v1/data")
-def get_data():
-    result=pd.read_sql('select * from "CovidCases_On";', engine)
-    result_dict=result.to_dict(orient='list')
-    return jsonify(result_dict)
+# @app.route("/api/v1/data")
+# def get_data():
+#     result=pd.read_sql('select * from "CovidCases_On";', engine)
+#     result_dict=result.to_dict(orient='list')
+#     return jsonify(result_dict)
 
 @app.route("/api/v1/dataX")
 def get_dataX():
