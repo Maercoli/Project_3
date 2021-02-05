@@ -63,6 +63,16 @@ def get_dataX():
         result_dict.append(single_dict)
     return jsonify(result_dict)
 
+@app.route("/api/v2/covid")
+def get_covid():
+    covid=session.query(covid_dataset).all()
+    covid_dict=[]
+    for i in covid:
+        single_dict={}
+        single_dict[i.Date]=i.Row_ID
+        covid_dict.append(single_dict)
+    return jsonify(covid_dict)
+
 
 #@app.route("/api/main/torontocovidcases")
 #def firstRoute(): 
