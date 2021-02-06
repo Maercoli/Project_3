@@ -34,6 +34,7 @@ Base.prepare(engine, reflect=True)
 
 #set all tables to variables
 CovidCases_On=Base.classes.CovidCases_On
+covid_dataset=Base.classes.covid_dataset
 
 session = Session(engine)
 
@@ -69,7 +70,7 @@ def get_covid():
     covid_dict=[]
     for i in covid:
         single_dict={}
-        single_dict[i.Date]=i.Row_ID
+        single_dict[i.Row_ID]=i.month
         covid_dict.append(single_dict)
     return jsonify(covid_dict)
 
