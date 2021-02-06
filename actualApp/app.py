@@ -71,7 +71,7 @@ def get_covid():
     covid_list = []
 
     with engine.connect() as con:
-        query = """SELECT "Reporting_PHU_City","month"  FROM "covid_dataset" LIMIT 10"""
+        query = """SELECT "Reporting_PHU_City","month"  FROM "covid_dataset" """
         result = con.execute(query)
         
         
