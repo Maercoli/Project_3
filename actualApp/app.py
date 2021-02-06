@@ -65,14 +65,41 @@ def get_dataX():
     return jsonify(result_dict)
 
 @app.route("/api/v2/covid")
+
 def get_covid():
-    covid=session.query(covid_dataset).all()
-    covid_dict=[]
-    for i in covid:
-        single_dict={}
-        single_dict[i.Row_ID]=i.month
-        covid_dict.append(single_dict)
-    return jsonify(covid_dict)
+    
+    covid_list = []
+
+    with engine.connect() as con:
+        query = """SELECT "Reporting_PHU_City","month"  FROM "covid_dataset" LIMIT 10"""
+        result = con.execute(query)
+        
+        
+
+        for row in result:
+            Reporting_PHU_City = row[0]
+            month = row[1]
+            covid_list.append({"Reporting_PHU_City": Reporting_PHU_City, "month":month})
+
+    return jsonify(covid_list)
+
+
+#def get_covid():
+ #   covid=session.query(covid_dataset).all()
+  #  covid_dict=[]
+   # for i in covid:
+    #   data = {}
+
+     #  data["month"] = i[17]
+     #  data["location"] = i[12]
+     #  covid_dict.append(data)
+      # single_dict={}
+      # single_dict[i.Row_ID]=i.month
+      # single_dict2={}
+      #  single_dict2[i.Row_ID]=i.Reporting_PHU_City
+      #  covid_dict.append(single_dict)
+      #covid_dict.append(single_dict2)
+   # return jsonify(covid_dict)
 
 
 #@app.route("/api/main/torontocovidcases")
