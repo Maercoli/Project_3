@@ -15,25 +15,36 @@ function test1(){
 
     d3.json(url).then(function(data){
 
-        var month_dataset = []
-        var quantity_dataset = []
+        var month_dataset = [];
+        var quantity_dataset = [];
 
-        data.forEach(function(x){
+        for (var i = 0; i<data.length;i++){
 
-            for (var i = 0; i<data.length;i++){
-
-                var datapoint = data[i]
+            var datapoint = data[i]
      
-                if (datapoint.Reporting_PHU_City === "St. Thomas") {
-                     month_dataset.push(datapoint.month.toString());
-                     quantity_dataset.push(1);
+            if (datapoint.Reporting_PHU_City === "St. Thomas") {
+                month_dataset.push(datapoint.month.toString());
+                quantity_dataset.push(1);
+                }};
 
-                }}
+        var trace1 = {
+            x:month_dataset,
+            y:quantity_dataset,
+            type:"bar"
+        };
 
-            console.log(month_dataset)
-            console.log(quantity_dataset)
+        var data = [trace1];
+        
+        var layout = {
+            title: "Number of Covid-19 cases in City",
+            xaxis: {title: "month"},
+            yaxis: {title: "Number of Covid-19 cases"}
+        };
+
+        Plotly.newPlot("bar",data,layout);
+
             
-            })})};
+    })};
 
 test1();
 
