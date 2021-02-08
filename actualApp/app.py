@@ -83,6 +83,30 @@ def get_covid():
 
     return jsonify(covid_list)
 
+@app.route("/api/v2/bar_line")
+
+def get_bar_line_data():
+    
+    bar_list_2019 = []
+    bar_list_2020 = []
+
+    with engine.connect() as con:
+        query1 = """SELECT "Date", "Units"  FROM "Price_Houses_sold_ON_2019" """
+        query2 = """SELECT "Date", "Units"  FROM "Price_Houses_sold_ON_2020" """
+        result1 = con.execute(query1)
+        result2 = con.execute(query2)
+
+        for row in result1:
+            Date = row[0]
+            Units = row[1]
+            bar_list_2019.append({"Date": Date, "Units":Units})
+        
+        for row in result2:
+            Date = row[0]
+            Units = row[1]
+            bar_list_2020.append({"Date": Date, "Units":Units})
+
+    return jsonify(bar_list_2019, bar_list_2020)
 
 #def get_covid():
  #   covid=session.query(covid_dataset).all()
