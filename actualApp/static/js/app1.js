@@ -11,6 +11,29 @@ function retreiveData(sample) {
 retreiveData();
 
 
+function dropdown_menu(){
+
+    d3.json(url).then(function(x){
+
+    var array_v0 = [];
+
+    for (var i = 0; i<x.length;i++){
+        var datapoint = x[i]
+        array_v0.push(datapoint.Reporting_PHU_City)
+    };
+
+    function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+      }
+
+    var unique = array_v0.filter(onlyUnique);
+
+    })};
+
+dropdown_menu();
+
+
+
 function test1(){
 
     d3.json(url).then(function(data){
@@ -47,5 +70,3 @@ function test1(){
     })};
 
 test1();
-
-console.log("testing")
