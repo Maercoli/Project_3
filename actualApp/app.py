@@ -108,6 +108,23 @@ def get_bar_line_data():
 
     return jsonify(bar_list_2019, bar_list_2020)
 
+@app.route("/api/v2/scatter")
+def get_scatter_data():
+
+    Scatter_list = []
+
+    with engine.connect() as con:
+            query = """SELECT "Date","Average", "Units"  FROM "Price_Houses_sold_ON_2020" """
+            result = con.execute(query)
+            for row in result:
+                Date = row[0]
+                Average = row[1]
+                Units = row[2]
+                Scatter_list.append({"Date": Date, "Average":Average, "Units":Units})
+
+    return jsonify(Scatter_list)
+
+
 #def get_covid():
  #   covid=session.query(covid_dataset).all()
   #  covid_dict=[]
