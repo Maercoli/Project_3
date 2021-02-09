@@ -109,6 +109,7 @@ def get_bar_line_data():
     return jsonify(bar_list_2019, bar_list_2020)
 
 @app.route("/api/v2/scatter")
+
 def get_scatter_data():
 
     Scatter_list = []
