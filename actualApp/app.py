@@ -24,6 +24,7 @@ app = Flask(__name__)
 #################################################
 
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 #app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "postgres://xbrqktwe:E_nywn4IJhz89kqxwG3M498kv8qnq4Z6@rajje.db.elephantsql.com:5432/xbrqktwe"
 engine = create_engine('postgres://xbrqktwe:E_nywn4IJhz89kqxwG3M498kv8qnq4Z6@rajje.db.elephantsql.com:5432/xbrqktwe')
 # Remove tracking modifications
@@ -83,6 +84,27 @@ def get_covid():
 
     return jsonify(covid_list)
 
+@app.route("/api/v2/covidTmp")
+# I will remove that one once it starts working (Emilia)
+
+def get_covid_tmp():
+    
+    covid_list_tmp = []
+
+    with engine.connect() as con:
+        query = """SELECT "Reporting_PHU_City","month", "Reporting_PHU_Latitude", "Reporting_PHU_Longitude" FROM "covid_dataset" """
+        result_tmp = con.execute(query)
+          
+    for row in result_tmp:
+        Reporting_PHU_City = row[0]
+        month = row[1]
+        Reporting_PHU_Latitude = row[2]
+        Reporting_PHU_Longitude = row[3]
+        #covid_cases_data = row[4]
+        covid_list_tmp.append({"Reporting_PHU_City": Reporting_PHU_City, "month":month ,"Reporting_PHU_Latitude":Reporting_PHU_Latitude, "Reporting_PHU_Longitude":Reporting_PHU_Longitude})
+
+    return jsonify(covid_list_tmp)
+
 @app.route("/api/v2/bar_line")
 
 def get_bar_line_data():
@@ -107,24 +129,6 @@ def get_bar_line_data():
             bar_list_2020.append({"Date": Date, "Units":Units})
 
     return jsonify(bar_list_2019, bar_list_2020)
-
-@app.route("/api/v2/scatter")
-
-def get_scatter_data():
-
-    Scatter_list = []
-
-    with engine.connect() as con:
-            query = """SELECT "Date","Average", "Units"  FROM "Price_Houses_sold_ON_2020" """
-            result = con.execute(query)
-            for row in result:
-                Date = row[0]
-                Average = row[1]
-                Units = row[2]
-                Scatter_list.append({"Date": Date, "Average":Average, "Units":Units})
-
-    return jsonify(Scatter_list)
-
 
 #def get_covid():
  #   covid=session.query(covid_dataset).all()
