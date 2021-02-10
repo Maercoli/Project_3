@@ -17,8 +17,8 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   accessToken: API_KEY
 }).addTo(myMap);
 
-//myMap.fitBounds(bounds);
-//myMap.setMaxBounds(myMap.getBounds());
+myMap.fitBounds(bounds);
+myMap.setMaxBounds(myMap.getBounds());
 
 // Country data
 var countries = [

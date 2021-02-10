@@ -14,23 +14,17 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
     <!-- Leaflet CSS -->
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-	integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-	crossorigin=""/>
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
 	<!-- Leaflet JS -->
 	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
 	integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
 	crossorigin=""></script>
 	<!-- Plotly -->
 	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
+	<!-- MapBox -->
 	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; transition: all 0.3s; }
-        .button { color: #fff; background-color: #555; padding: 1em; margin: 1em; position: absolute; right: 1em; top: 1em; border-radius: 0.5em; border-bottom: 2px #222 solid; cursor: pointer; }
-        #resizeMap { top: 5em; }
-    </style>
 
 </head>
 
@@ -38,10 +32,7 @@
 	<!-- Initiate Navbar -->
 	<nav class="navbar bg-light navbar-light navbar-expand-lg">
 		<div class="container">
-			<img src="/actualApp/assets/img/logo.png" 
-			alt="logo" title="Logo" width="60" height="40">
 			<h4 class="nav link" href="index.html" class="navbar-brand" style="padding-left:10;">dataPlus</h4>
-			
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarResponsive">
 				<span class="navbar-toggler-icon"></span>
@@ -50,6 +41,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a href="" class="nav link">Home</a></li>
+					<li class="nav-item"><a href="map.html" class="nav link">Map Report</a></li>
 					<li class="nav-item"><a href="/map" class="nav link">Report</a></li>
 					<li class="nav-item"><a href="" class="nav link">Data</a></li>
 				</ul>
@@ -165,12 +157,11 @@
 				<p style="font-size: 16px;"><strong>Lack of Healthcare VS Age, Obesity and Poverty:</strong>  the data show that the age group 
                     between 36-40 years old is the one who most ......
                 </p>	
-			</div> 
+			</div>
 
             <!--Add MAP here-->
 			<div class="col-md-9">
 				<div id="map"></div>
-				
 			</div>
 		</div>
 	</div>
@@ -187,24 +178,13 @@
 
 	<!-- End Dision  -->
 
-	<!-- BAR/LINE Headers -->
-	<div class="container">
-		<div class="row">
-			<div class="col-5 text-left mt-4">
-				<h4 class="my-4" style="color: black;"><strong>Observable trends:</strong></h4>
-			</div>
-			<div class="col-7 text-center mt-4">
-				<p>This is an interact graph, click on "labels" and "dots" to see more.</p>
-			</div>
-		</div>
-	</div>
-
 	<!-- BAR/LINE Content -->
 	<div class="container my-2">
 		<div class="row">
 
             <!-- Add FORM/TEXT  here-->
 			<div class="col-3 text-left ">
+				<h7 class="my-4" style="color: black;"><strong>Choose a Year to find out some Real Estate trends:</strong></h7>
 				<select id="selYear">
 					<option value="database1">2019</option>
 					<option value="database2">2020</option>
@@ -221,24 +201,7 @@
 		</div>
 	</div>
 	<!-- End BAR/LINE Content -->
-	//<div id="map"></div>
-	
-	<!-- Start Jumbotron -->
-	<div class="jumbotron py-5 mb-0">
-		<div class="container">
-			<div class="row ">
-				<div class="col-md-7 lg-8 xl-9 auto text-center">
-					<h4>Looking for quality data discovery and analysis?</h4>
-				</div>
-				<div class="col-md-5 lg-4 xl-3 pt-4 pt-md-0">
-					<a href="#" class="btn btn-primary btn-lg">Contact us today</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- End Jumbotron -->
-
+	<!-- <div id="map"></div> -->
 	<!-- Start Socket -->
 	<div class="socket text-light text-center py-3">
 		<p>&copy;<a href="#" target="_blank">www.dataPlus.com</a></p>
@@ -255,13 +218,14 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	
-	<!-- Import app2-->
+	<!-- Import apps and config-->
     <script type="text/javascript" src="./static/js/app.js"></script>
     <script type="text/javascript" src="./static/js/app1.js"></script>
 	<script type="text/javascript" src="./static/js/app2.js"></script>
 	<script type="text/javascript" src="./static/js/app3.js"></script>
     <script type="text/javascript" src="./static/js/config.js"></script>
-	<script type="text/javascript" src="./static/js/logic.js"></script>
+	<script type="text/javascript" src="./static/js/testlogic.js"></script>
 	
 </body>
 </html>
+
