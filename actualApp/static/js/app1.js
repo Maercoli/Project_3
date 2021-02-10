@@ -48,6 +48,7 @@ function test1(){
 
         var month_dataset = [];
         var quantity_dataset = [];
+        var month_test = [];
 
         var dropdownMenuValue = d3.selectAll("#selDataset").node().value;
 
@@ -60,6 +61,47 @@ function test1(){
                 quantity_dataset.push(1);
                 }};
 
+        for (var i=0;i<month_dataset.length;i++){
+            switch(month_dataset) {
+                case "1":
+                    month_test.push("January");
+                    break;
+                case "2":
+                    month_test.push("February");
+                    break;  
+                case "3":
+                    month_test.push("March");
+                    break;                                         
+                case "4":
+                    month_test.push("April");
+                    break;
+                case "5":
+                    month_test.push("May");
+                    break;
+                case "6":
+                    month_test.push("June");
+                    break;
+                case "7":
+                    month_test.push("July");
+                    break;      
+                case "8":
+                    month_test.push("August");
+                    break;
+                case "9":
+                    month_test.push("September"); 
+                case "10":
+                    month_test.push("October");
+                case "11":
+                    month_test.push("November");      
+                case "12":
+                    month_test.push("December");
+                default:
+                    console.log("error")                                                                 
+            }
+        };  
+        
+        console.log(month_test);
+
         var trace1 = {
             x:month_dataset,
             y:quantity_dataset,
@@ -69,9 +111,9 @@ function test1(){
         var data = [trace1];
         
         var layout = {
-            title: "Number of Covid-19 cases in City",
-            xaxis: {title: "month"},
-            yaxis: {title: "Number of Covid-19 cases"}
+            title: "Number of reported Covid-19 cases in your city",
+            xaxis: {title: "Month"},
+            yaxis: {title: "Number of Covid-19 cases reported"}
         };
 
         Plotly.newPlot("bar",data,layout);
