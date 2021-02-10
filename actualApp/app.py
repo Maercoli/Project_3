@@ -84,6 +84,10 @@ def get_covid():
 
     return jsonify(covid_list)
 
+@app.route("/map")
+def start_map():
+    return render_template("map.html")
+
 @app.route("/api/v2/covidTmp")
 # I will remove that one once it starts working (Emilia)
 
