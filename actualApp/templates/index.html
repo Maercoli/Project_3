@@ -19,6 +19,15 @@
 	<!-- Plotly -->
 	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; transition: all 0.3s; }
+        .button { color: #fff; background-color: #555; padding: 1em; margin: 1em; position: absolute; right: 1em; top: 1em; border-radius: 0.5em; border-bottom: 2px #222 solid; cursor: pointer; }
+        #resizeMap { top: 5em; }
+    </style>
+
 </head>
 
 <body>
@@ -156,7 +165,8 @@
 
             <!--Add MAP here-->
 			<div class="col-md-9">
-				<div id="map"></div>
+				<div id="map2"></div>
+				
 			</div>
 		</div>
 	</div>
@@ -191,16 +201,17 @@
 
             <!-- Add FORM/TEXT  here-->
 			<div class="col-3 text-left ">
-				<select id="selDataset">
-					<option value="dataset1">2020</option>
-					<option value="dataset2">2019</option>
+				<select id="selYear">
+					<option value="database1">2019</option>
+					<option value="database2">2020</option>
 				</select>	
 					
 			</div>
 
             <!--Add BAR/LINE here-->
 			<div class="col-md-9">
-			  <div id="plot" style="align-self: baseline;">
+			  <div id="plot">
+
 			  </div>
 			</div>
 		</div>
