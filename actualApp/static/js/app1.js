@@ -103,6 +103,12 @@ function optionChanged(){
                month_dataset.push(datapoint.month.toString());
                quantity_dataset.push(1);
                }};
+
+        //Bar chart: We restyle the necessary items:
+
+         Plotly.restyle("bar","x",[month_dataset])
+         Plotly.restyle("bar","y",[quantity_dataset])  
+
         //console.log(datapoint);
         
         console.log(month_dataset);
