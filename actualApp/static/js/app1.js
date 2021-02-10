@@ -1,19 +1,19 @@
-var url = `/api/v2/covid`
+var url_app1 = `/api/v2/covid`
 
 //Initial test to ensure that we can run the data:
 
-function retreiveData(sample) {
-    d3.json(url).then(data=> {
-        console.log(data)
-    });
-};
+//  function retreiveData(sample) {
+//      d3.json(url).then(data=> {
+//          console.log(data)
+//      });
+//  };
 
-retreiveData();
+//retreiveData();
 
 
 function dropdown_menu(){
 
-    d3.json(url).then(function(x){
+    d3.json(url_app1).then(function(x){
 // We create an array with all the cities included in each entry
     var array_v0 = [];
 
@@ -44,7 +44,7 @@ dropdown_menu();
 
 function test1(){
 
-    d3.json(url).then(function(data){
+    d3.json(url_app1).then(function(data){
 
         var month_dataset = [];
         var quantity_dataset = [];
@@ -75,7 +75,8 @@ function test1(){
         };
 
         Plotly.newPlot("bar",data,layout);
-
+        console.log(month_dataset)
+        console.log(quantity_dataset)
             
     })};
 
@@ -84,28 +85,61 @@ test1();
 
 d3.selectAll("#selDataset").on("change", optionChanged);
 
-  // DETERMINE WHAT HAPPENS WHEN SOMEONE CHOOSES A DIFFERENT USER ID:
-  
-  function optionChanged() {
-       
-    d3.json(url).then(function(data) {
+function optionChanged(){
 
-        var month_dataset1 = [];
-        var quantity_dataset1 = [];  
-        var dropdownMenuValue1 = d3.selectAll("#selDataset").node().value;
+    d3.json(url_app1).then(function(data){
 
+        var dropdownMenuValue = d3.selectAll("#selDataset").node().value;
+        console.log(dropdownMenuValue);
+
+        var month_dataset = [];
+        var quantity_dataset = [];
+        // console.log(url_app1);
         for (var i = 0; i<data.length;i++){
 
-            var datapoint1 = data[i]
+            var datapoint = data[i]
      
-            if (datapoint1.Reporting_PHU_City === `${dropdownMenuValue1}`) {
-                month_dataset1.push(datapoint1.month.toString());
-                quantity_dataset1.push(1);
-                }};
+            if (datapoint.Reporting_PHU_City === `${dropdownMenuValue}`) {
+               month_dataset.push(datapoint.month.toString());
+               quantity_dataset.push(1);
+               }};
+
         //Bar chart: We restyle the necessary items:
 
-        Plotly.restyle("bar","x",[month_dataset1])
-        Plotly.restyle("bar","y",[quantity_dataset1])         
-        console.log(month_dataset1)
-        console.log(quantity_dataset1)        
-  })};
+         Plotly.restyle("bar","x",[month_dataset])
+         Plotly.restyle("bar","y",[quantity_dataset])  
+
+        //console.log(datapoint);
+        
+        console.log(month_dataset);
+        console.log(quantity_dataset);
+
+            })};
+
+
+  // DETERMINE WHAT HAPPENS WHEN SOMEONE CHOOSES A DIFFERENT USER ID:
+  
+//   function optionChanged() {
+       
+//     d3.json(url).then(function(data) {
+
+//         var month_dataset = [];
+//         var quantity_dataset = [];  
+//         var dropdownMenuValue = d3.selectAll("#selDataset").node().value;
+
+//         for (var i = 0; i<data.length;i++){
+
+//             var datapoint = data[i]
+     
+//             if (datapoint.Reporting_PHU_City === `${dropdownMenuValue}`) {
+//                 month_dataset.push(datapoint.month.toString());
+//                 quantity_dataset.push(1);
+//                 }};
+
+//        //Bar chart: We restyle the necessary items:
+
+//         Plotly.restyle("bar","x",[month_dataset])
+//         Plotly.restyle("bar","y",[quantity_dataset])         
+//         console.log(dropdownMenuValue)
+//         console.log(quantity_dataset)        
+//   })};
