@@ -132,7 +132,12 @@
     color: #68a0d2;
   } 
   
-  
+  /* =========== Line Plot ==========*/
+#plot {
+  width: 700px;
+  height: 480px;
+}
+
   /*============= SOCKET =============*/
   .socket {
     background-color: #222222;
