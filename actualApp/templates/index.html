@@ -23,9 +23,13 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; transition: all 0.3s; }
+        #map {height: 180px; position:relative; top:0; bottom:0; width:30%; transition: all 0.3s; }
         .button { color: #fff; background-color: #555; padding: 1em; margin: 1em; position: absolute; right: 1em; top: 1em; border-radius: 0.5em; border-bottom: 2px #222 solid; cursor: pointer; }
-        #resizeMap { top: 5em; }
+		.leaflet-control-container {position: relative;	height: 280; width: 30;}
+		.leaflet-top {position: relative;	height: 280; width: 30;}
+		.leaflet-top {position: relative;	height: 280; width: 30;}
+		.leaflet-control-attribution {position: relative;	height: 280; width: 30;}
+		.leaflet-pane {position: relative;	height: 280; width: 30;}
     </style>
 
 </head>
@@ -34,10 +38,7 @@
 	<!-- Initiate Navbar -->
 	<nav class="navbar bg-light navbar-light navbar-expand-lg">
 		<div class="container">
-			<img src="/actualApp/assets/img/logo.png" 
-			alt="logo" title="Logo" width="60" height="40">
 			<h4 class="nav link" href="index.html" class="navbar-brand" style="padding-left:10;">dataPlus</h4>
-			
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarResponsive">
 				<span class="navbar-toggler-icon"></span>
@@ -46,7 +47,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a href="" class="nav link">Home</a></li>
-					<li class="nav-item"><a href="map.html" class="nav link">Report</a></li>
+					<li class="nav-item"><a href="map.html" class="nav link">Map Report</a></li>
 					<li class="nav-item"><a href="" class="nav link">Data</a></li>
 				</ul>
 			</div>
@@ -165,7 +166,7 @@
 
             <!--Add MAP here-->
 			<div class="col-md-9">
-				<div id="map2"></div>
+				<div id="mapOne"></div>
 				
 			</div>
 		</div>
@@ -183,24 +184,13 @@
 
 	<!-- End Dision  -->
 
-	<!-- BAR/LINE Headers -->
-	<div class="container">
-		<div class="row">
-			<div class="col-5 text-left mt-4">
-				<h4 class="my-4" style="color: black;"><strong>Observable trends:</strong></h4>
-			</div>
-			<div class="col-7 text-center mt-4">
-				<p>This is an interact graph, click on "labels" and "dots" to see more.</p>
-			</div>
-		</div>
-	</div>
-
 	<!-- BAR/LINE Content -->
 	<div class="container my-2">
 		<div class="row">
 
             <!-- Add FORM/TEXT  here-->
 			<div class="col-3 text-left ">
+				<h7 class="my-4" style="color: black;"><strong>Choose a Year to find out some Real Estate trends:</strong></h7>
 				<select id="selYear">
 					<option value="database1">2019</option>
 					<option value="database2">2020</option>
@@ -258,6 +248,7 @@
 	<script type="text/javascript" src="./static/js/app3.js"></script>
     <script type="text/javascript" src="./static/js/config.js"></script>
 	<script type="text/javascript" src="./static/js/testlogic.js"></script>
+	<script type="text/javascript" src="./static/js/logic.js"></script>
 	
 </body>
 </html>

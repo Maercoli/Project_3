@@ -20,13 +20,23 @@ function init() {
         // console.log(dates_2019);
         // console.log(units_2019);
 
-        set = [{
+        set1 = [{
         x: dates_2019,
         y: units_2019 }];
+
+        var layout = {
+            title:'Number of Houses Sold in Ontario Monthly',
+            xaxis: {
+              title: 'Month/Year'
+            },
+            yaxis: {
+              title: '# of Units Sold'
+            }
+          };
     
         var CHART = d3.selectAll("#plot").node();
     
-        Plotly.newPlot(CHART, set);
+        Plotly.newPlot(CHART, set1, layout);
             
     });
 }
@@ -61,12 +71,12 @@ function updatePlotly() {
         var y = [];
 
         switch(dataset) {
-        case "database2":
+        case "database1":
             x = dates_2019;
             y = units_2019;
             break;
 
-        case "database1":
+        case "database2":
             x = dates_2020;
             y = units_2020;
             break;
