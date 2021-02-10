@@ -12,10 +12,14 @@
 	<link rel="stylesheet" href="./static/css/d3Style.css">
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-      crossorigin=""></script>
+    <!-- Leaflet CSS -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+	integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+	crossorigin=""/>
+	<!-- Leaflet JS -->
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+	integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+	crossorigin=""></script>
 	<!-- Plotly -->
 	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
@@ -161,11 +165,11 @@
 				<p style="font-size: 16px;"><strong>Lack of Healthcare VS Age, Obesity and Poverty:</strong>  the data show that the age group 
                     between 36-40 years old is the one who most ......
                 </p>	
-			</div>
+			</div> 
 
             <!--Add MAP here-->
 			<div class="col-md-9">
-				<div id="map2"></div>
+				<div id="map"></div>
 				
 			</div>
 		</div>
@@ -217,7 +221,7 @@
 		</div>
 	</div>
 	<!-- End BAR/LINE Content -->
-
+	//<div id="map"></div>
 	
 	<!-- Start Jumbotron -->
 	<div class="jumbotron py-5 mb-0">
