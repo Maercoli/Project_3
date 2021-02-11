@@ -4,7 +4,7 @@ import pandas as pd
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
+from sqlalchemy import (create_engine, func)
 from flask import (
     Flask,
     render_template,
@@ -48,6 +48,9 @@ db = SQLAlchemy(app)
 def home():
     return render_template("index.html")
 
+@app.route("/map")
+def start_map():
+    return render_template("map.html")
 
 # @app.route("/api/v1/data")
 # def get_data():
@@ -84,9 +87,6 @@ def get_covid():
 
     return jsonify(covid_list)
 
-@app.route("/map")
-def start_map():
-    return render_template("map.html")
 
 @app.route("/api/v2/covidTmp")
 # I will remove that one once it starts working (Emilia)
@@ -94,20 +94,25 @@ def start_map():
 def get_covid_tmp():
     
     covid_list_tmp = []
+#covid_dataset
+#session.query(Table.column, func.count(Table.column)).group_by(Table.column).all()
+##    //with engine.connect() as con:
+##   //    query = """SELECT "Reporting_PHU_City","month", "Reporting_PHU_Latitude", "Reporting_PHU_Longitude" FROM "covid_dataset" """
+##    //    result_tmp = con.execute(query)
+    ###covid_list_tmp = session.query(covid_dataset.Reporting_PHU_City, covid_dataset.month,covid_dataset.Reporting_PHU_Latitude, covid_dataset.Reporting_PHU_Longitude, func.count(covid_dataset.Row_ID)).group_by(covid_dataset.Reporting_PHU_City,covid_dataset.month, covid_dataset.Reporting_PHU_Latitude,covid_dataset.Reporting_PHU_Longitude).order_by(covid_dataset.Reporting_PHU_City, covid_dataset.month).all()
+    covid_list_tmp = session.query(covid_dataset.Reporting_PHU_City, covid_dataset.Reporting_PHU_Latitude, covid_dataset.Reporting_PHU_Longitude, func.count(covid_dataset.Row_ID)).group_by(covid_dataset.Reporting_PHU_City, covid_dataset.Reporting_PHU_Latitude,covid_dataset.Reporting_PHU_Longitude).order_by(covid_dataset.Reporting_PHU_City).all()
 
-    with engine.connect() as con:
-        query = """SELECT "Reporting_PHU_City","month", "Reporting_PHU_Latitude", "Reporting_PHU_Longitude" FROM "covid_dataset" """
-        result_tmp = con.execute(query)
-          
-    for row in result_tmp:
-        Reporting_PHU_City = row[0]
-        month = row[1]
-        Reporting_PHU_Latitude = row[2]
-        Reporting_PHU_Longitude = row[3]
-        #covid_cases_data = row[4]
-        covid_list_tmp.append({"Reporting_PHU_City": Reporting_PHU_City, "month":month ,"Reporting_PHU_Latitude":Reporting_PHU_Latitude, "Reporting_PHU_Longitude":Reporting_PHU_Longitude})
+    
+#    for row in result_tmp:
+#        Reporting_PHU_City = row[0]
+#        month = row[1]
+#        Reporting_PHU_Latitude = row[2]
+#        Reporting_PHU_Longitude = row[3]
+#        #covid_cases_data = row[4]
+#        covid_list_tmp.append({"Reporting_PHU_City": Reporting_PHU_City, "month":month ,"Reporting_PHU_Latitude":Reporting_PHU_Latitude, "Reporting_PHU_Longitude":Reporting_PHU_Longitude})
 
     return jsonify(covid_list_tmp)
+    
 
 @app.route("/api/v2/bar_line")
 
@@ -167,77 +172,6 @@ def get_scatter():
                 Scatter_list.append({"Date": Date, "Average":Average, "Units":Units})
     return jsonify(Scatter_list)
 
-
-#def get_covid():
- #   covid=session.query(covid_dataset).all()
-  #  covid_dict=[]
-   # for i in covid:
-    #   data = {}
-
-     #  data["month"] = i[17]
-     #  data["location"] = i[12]
-     #  covid_dict.append(data)
-      # single_dict={}
-      # single_dict[i.Row_ID]=i.month
-      # single_dict2={}
-      #  single_dict2[i.Row_ID]=i.Reporting_PHU_City
-      #  covid_dict.append(single_dict)
-      #covid_dict.append(single_dict2)
-   # return jsonify(covid_dict)
-
-
-#@app.route("/api/main/torontocovidcases")
-#def firstRoute(): 
-    #data = db.session.query(Cases.City, Cases.Count).filter(Cases.city =="Toronto").all()
-#    return jsonify(data)
-
-#    if __name__ == "__main__":
-#    app.run()
-
-
-
-# Query the database and send the jsonified results
-#@app.route("/send", methods=["GET", "POST"])
-#def send():
-#    if request.method == "POST":
-#        name = request.form["petName"]
-#        lat = request.form["petLat"]
-# #        lon = request.form["petLon"]
-
-#         pet = Pet(name=name, lat=lat, lon=lon)
-#         db.session.add(pet)
-#         db.session.commit()
-#         return redirect("/", code=302)
-
-#     return render_template("form.html")
-
-
-# @app.route("/api/pals")
-# def pals():
-#     results = db.session.query(Pet.name, Pet.lat, Pet.lon).all()
-
-#     hover_text = [result[0] for result in results]
-#     lat = [result[1] for result in results]
-#     lon = [result[2] for result in results]
-
-#     pet_data = [{
-#         "type": "scattergeo",
-#         "locationmode": "USA-states",
-#         "lat": lat,
-#         "lon": lon,
-#         "text": hover_text,
-#         "hoverinfo": "text",
-#         "marker": {
-#             "size": 50,
-#             "line": {
-#                 "color": "rgb(8,8,8)",
-#                 "width": 1
-#             },
-#         }
-#     }]
-
-#     return jsonify(pet_data)
-
-
+session.close()
 if __name__ == "__main__":
     app.run()

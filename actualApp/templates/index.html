@@ -12,10 +12,14 @@
 	<link rel="stylesheet" href="./static/css/d3Style.css">
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-      crossorigin=""></script>
+    <!-- Leaflet CSS -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+	<!-- Leaflet JS -->
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+	integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+	crossorigin=""></script>
 	<!-- Plotly -->
 	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	<!-- MapBox -->
@@ -39,7 +43,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a href="" class="nav link">Home</a></li>
-					<li class="nav-item"><a href="map.html" class="nav link">Map Report</a></li>
+					<li class="nav-item"><a href="/map" class="nav link">Map Report</a></li>
 					<li class="nav-item"><a href="/map" class="nav link">Report</a></li>
 					<li class="nav-item"><a href="" class="nav link">Data</a></li>
 				</ul>
@@ -130,15 +134,13 @@
 
             <!-- Add FORM/TEXT  here-->
 			<div class="col-md-3">
-				<p style="font-size: 16px;"><strong>Lack of Healthcare VS Age, Obesity and Poverty:</strong>  the data show that the age group 
-                    between 36-40 years old is the one who most ......
+				<p style="font-size: 16px;"><strong>City name and Number of confirmed cases:</strong>  markers are created with a pop-up that displays that city's name and its respective confirmed covid cases in local public health unit
                 </p>	
 			</div>
 
             <!--Add MAP here-->
 			<div class="col-md-9">
-				<div id="mapOne"></div>
-				
+				<div id="map"></div>
 			</div>
 		</div>
 	</div>
@@ -192,7 +194,7 @@
 	
 	
 	<!-- End BAR/LINE Content -->
-
+	<!-- <div id="map"></div> -->
 	<!-- Start Socket -->
 	<div class="socket text-light text-center pt-1">
 		<p>&copy;<a href="#" target="_blank">www.dataPlus.com</a></p>
@@ -216,7 +218,7 @@
 	<script type="text/javascript" src="./static/js/app3.js"></script>
     <script type="text/javascript" src="./static/js/config.js"></script>
 	<script type="text/javascript" src="./static/js/testlogic.js"></script>
-	<script type="text/javascript" src="./static/js/logic.js"></script>
 	
 </body>
 </html>
+
