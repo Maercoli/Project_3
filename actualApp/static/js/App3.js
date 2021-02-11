@@ -1,6 +1,6 @@
 
 var svgWidth = 950;
-var svgHeight = 750
+var svgHeight = 550
 
 var margin = {
   top: 20,
@@ -17,7 +17,7 @@ var height = svgHeight - margin.top - margin.bottom;
 var svg = d3
   .select("#scatter")
   .append("svg")
-  .attr("viewBox", `0 0 950 750`)
+  .attr("viewBox", `0 0 950 600`)
   
 
 // Append an SVG group
