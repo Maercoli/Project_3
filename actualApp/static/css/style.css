@@ -56,7 +56,11 @@
     padding-left: 80px;
     padding-top: 50px;
   }
- #map { height: 500px; }
+ #map, 
+ body,
+ html {
+   height: 100%;
+ }
   /*-- Body Reset --*/
   body {
     overflow-x: hidden;
