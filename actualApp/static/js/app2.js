@@ -14,18 +14,19 @@ function init() {
 
     d3.json(url_barLine).then(data=> {
 
+        // get Ontario data
         var dates_2019 = data[0].map(d => d.Date);
         var units_2019 = data[0].map(d => d.Units);
-
         // console.log(dates_2019);
         // console.log(units_2019);
 
+        // Add initial dataset for #plot ON
         set1 = [{
         x: dates_2019,
         y: units_2019 }];
 
         var layout = {
-            title:'Number of Houses Sold in Ontario Monthly',
+            title:'Ontario: Houses Sold by Month',
             xaxis: {
               title: 'Month/Year'
             },
@@ -37,6 +38,29 @@ function init() {
         var CHART = d3.selectAll("#plot").node();
     
         Plotly.newPlot(CHART, set1, layout);
+
+        // get BC data
+        var bc_dates_2019 = data[3].slice(0,11).map(d => d.Date)
+        var bc_units_2019 = data[3].slice(11,22).map(d => d.Units)
+
+        // Add initial dataset for #plot ON
+        setBc = [{
+            x: bc_dates_2019,
+            y: bc_units_2019 }];
+    
+            var layout1 = {
+                title:'British Columbia: Houses Sold by Month',
+                xaxis: {
+                  title: 'Month/Year'
+                },
+                yaxis: {
+                  title: '# of Units Sold'
+                }
+              };
+        
+            var CHART1 = d3.selectAll("#plot1").node();
+        
+            Plotly.newPlot(CHART1, set1, layout1);
             
     });
 }
@@ -91,20 +115,60 @@ function updatePlotly() {
     Plotly.restyle(CHART, "x", [x]);
     Plotly.restyle(CHART, "y", [y]);
 
-
   });
-    
   
 }
 
 init()
 
 
+
+
+var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
 // var myChart = new Chart(ctx, {
 //     type: 'bar',
 //     data: data,
 //     options: options
 // });
+
+// console.log(myChart)
 // var mixedChart = new Chart(ctx, {
 //     type: 'bar',
 //     data: {

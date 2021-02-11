@@ -115,12 +115,19 @@ def get_bar_line_data():
     
     bar_list_2019 = []
     bar_list_2020 = []
+    bc_list_2019 = []
+    bc_list_2020 = []
 
     with engine.connect() as con:
         query1 = """SELECT "Date", "Units"  FROM "Price_Houses_sold_ON_2019" """
         query2 = """SELECT "Date", "Units"  FROM "Price_Houses_sold_ON_2020" """
+        query3 = """SELECT "Date", "Units"  FROM "Units_sold_BC_transf_2019" """
+        query4 = """SELECT "Date", "Units"  FROM "Units_sold_BC_transf_2020" """
+
         result1 = con.execute(query1)
         result2 = con.execute(query2)
+        result3 = con.execute(query3)
+        result4 = con.execute(query4)
 
         for row in result1:
             Date = row[0]
@@ -131,8 +138,18 @@ def get_bar_line_data():
             Date = row[0]
             Units = row[1]
             bar_list_2020.append({"Date": Date, "Units":Units})
+        
+        for row in result3:
+            Date = row[0]
+            Units = row[1]
+            bc_list_2020.append({"Date": Date, "Units":Units})
+        
+        for row in result4:
+            Date = row[0]
+            Units = row[1]
+            bc_list_2020.append({"Date": Date, "Units":Units})
 
-    return jsonify(bar_list_2019, bar_list_2020)
+    return jsonify(bar_list_2019, bar_list_2020, bc_list_2019, bc_list_2020)
 
 @app.route("/api/v2/scatter")
 
