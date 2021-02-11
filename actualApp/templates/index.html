@@ -25,10 +25,12 @@
 	<!-- MapBox -->
 	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.css' rel='stylesheet' />
+	<!--Charts.js-->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 
 </head>
 
-<body>
+<body class="bg-white">
 	<!-- Initiate Navbar -->
 	<nav class="navbar bg-light navbar-light navbar-expand-lg">
 		<div class="container">
@@ -96,10 +98,7 @@
     <!-- ADD HEADERS-->
 	<div class="container">
 		<div class="row">
-			<div class="col-5 text-left mt-4">
-				<h4 class="my-4" style="color: black;"><strong>Observable trends:</strong></h4>
-			</div>
-			<div class="col-7 text-center mt-4">
+			<div class="col-12 text-center mt-4">
 				<p>This is an interact graph, click on "labels" and "dots" to see more.</p>
 			</div>
 		</div>
@@ -107,23 +106,16 @@
 
 	<!-- SCATTER Section -->
 	<div class="container my-2">
+		<div class="text-center">
 		<div class="row">
-            <!-- ADD FORM/TEXT HERE-->
-			<div class="col-3 text-left ">
-				<p style="font-size: 16px;"><strong>Lack of Healthcare VS Age, Obesity and Poverty:</strong>  the data show that the age group 
-                    between 36-40 years old is the one who most ......
-                </p>	
-			</div>
-		</div>
-            <!-- ADD PLOT HERE-->
-		<div class="col-md-8 ">
-			<div id="scatter">
+			<div class="col-md-10">
+				
 				<!-- We append our chart here. -->
+				<div id="scatter" style="float: center;"></div>
 			</div>
 		</div>
-		
-	
-	</div>
+		</div>
+	</div>	
 	<!-- End SCATTER Section -->
 
 	<!-- Division Bar-->
@@ -135,18 +127,6 @@
 	</div>
 
 	<!-- End Dision  -->
-
-	<!-- MAP Headers -->
-	<div class="container">
-		<div class="row">
-			<div class="col-5 text-left mt-4">
-				<h4 class="my-4" style="color: black;"><strong>Observable trends:</strong></h4>
-			</div>
-			<div class="col-7 text-center mt-4">
-				<p>This is an interact graph, click on "labels" and "dots" to see more.</p>
-			</div>
-		</div>
-	</div>
 
 	<!-- MAP Content -->
 	<div class="container my-2">
@@ -178,31 +158,45 @@
 	<!-- End Dision  -->
 
 	<!-- BAR/LINE Content -->
-	<div class="container my-2">
+	<div class="container-fluid my-2">
 		<div class="row">
-
-            <!-- Add FORM/TEXT  here-->
-			<div class="col-3 text-left ">
+            <!-- Add FORM  here-->
+			<div class="col-12 text-left ">
 				<h7 class="my-4" style="color: black;"><strong>Choose a Year to find out some Real Estate trends:</strong></h7>
 				<select id="selYear">
 					<option value="database1">2019</option>
 					<option value="database2">2020</option>
 				</select>	
-					
 			</div>
-
-            <!--Add BAR/LINE here-->
-			<div class="col-md-9">
-			  <div id="plot">
-
-			  </div>
+		</div>
+            <!--Add LINE here-->
+	
+	<div class="row">
+		<div class="col-md-6">
+			<div id="plot"> </div>
+		</div>
+		<div class="col-md-6">
+			<div id="plot1"></div>
+		</div>
+	</div>
+	<div class="row py-4">
+		<div class="col-md-7 offset-md-3">
+			<div class="card">
+				<div class="card-body">
+					<h3>Dynamic Chart</h3>
+				</div>
+				<div class="card-body">
+					<canvas id="myChart"></canvas>
+				</div>
 			</div>
 		</div>
 	</div>
+	
+	
 	<!-- End BAR/LINE Content -->
 	<!-- <div id="map"></div> -->
 	<!-- Start Socket -->
-	<div class="socket text-light text-center py-3">
+	<div class="socket text-light text-center pt-1">
 		<p>&copy;<a href="#" target="_blank">www.dataPlus.com</a></p>
 	</div>
 	<!-- End Socket -->

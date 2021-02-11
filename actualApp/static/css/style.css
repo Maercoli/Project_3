@@ -133,12 +133,18 @@
     color: #68a0d2;
   } 
   
-  /* =========== Line Plot ==========*/
-#plot {
-  width: 700px;
-  height: 480px;
-}
+  /* =========== Plots Adjustments ==========*/
+  
+  #pieChart {
+      width: 45%;
+      vertical-align: text-top;
+      display: inline-block;
+  }
+  #myChart {
+    width: 45%;
+    display: center;
 
+  }
   /*============= SOCKET =============*/
   .socket {
     background-color: #222222;
