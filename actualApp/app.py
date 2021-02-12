@@ -26,7 +26,8 @@ app = Flask(__name__)
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 #app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "postgres://xbrqktwe:E_nywn4IJhz89kqxwG3M498kv8qnq4Z6@rajje.db.elephantsql.com:5432/xbrqktwe"
-engine = create_engine('postgres://xbrqktwe:E_nywn4IJhz89kqxwG3M498kv8qnq4Z6@rajje.db.elephantsql.com:5432/xbrqktwe')
+# engine = create_engine('postgres://xbrqktwe:E_nywn4IJhz89kqxwG3M498kv8qnq4Z6@rajje.db.elephantsql.com:5432/xbrqktwe')
+engine=create_engine('postgres://gvrdqgbticobzd:62de2f0015e8651bd5c46847dad2dde40c5d646fe973a52346228fb03564862d@ec2-100-24-139-146.compute-1.amazonaws.com:5432/d3j1lp4tuvm6l1')
 # Remove tracking modifications
 #app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -37,7 +38,7 @@ Base.prepare(engine, reflect=True)
 CovidCases_On=Base.classes.CovidCases_On
 covid_dataset=Base.classes.covid_dataset
 
-session = Session(engine)
+#session = Session(engine)
 
 db = SQLAlchemy(app)
 
@@ -60,17 +61,22 @@ def start_map():
 
 @app.route("/api/v1/dataX")
 def get_dataX():
+    
+    session = Session(engine)
     result=session.query(CovidCases_On).all()
     result_dict=[]
     for i in result:
         single_dict={}
         single_dict[i.Date]=i.Number_of_Cases
         result_dict.append(single_dict)
+    session.close()
     return jsonify(result_dict)
 
 @app.route("/api/v2/covid")
 
 def get_covid():
+    
+    session = Session(engine)
     
     covid_list = []
 
@@ -84,7 +90,7 @@ def get_covid():
             Reporting_PHU_City = row[0]
             month = row[1]
             covid_list.append({"Reporting_PHU_City": Reporting_PHU_City, "month":month})
-
+    session.close()
     return jsonify(covid_list)
 
 
@@ -92,6 +98,8 @@ def get_covid():
 # I will remove that one once it starts working (Emilia)
 
 def get_covid_tmp():
+    
+    session = Session(engine)
     
     covid_list_tmp = []
 #covid_dataset
@@ -110,7 +118,7 @@ def get_covid_tmp():
 #        Reporting_PHU_Longitude = row[3]
 #        #covid_cases_data = row[4]
 #        covid_list_tmp.append({"Reporting_PHU_City": Reporting_PHU_City, "month":month ,"Reporting_PHU_Latitude":Reporting_PHU_Latitude, "Reporting_PHU_Longitude":Reporting_PHU_Longitude})
-
+    session.close()
     return jsonify(covid_list_tmp)
     
 
@@ -172,6 +180,6 @@ def get_scatter():
                 Scatter_list.append({"Date": Date, "Average":Average, "Units":Units})
     return jsonify(Scatter_list)
 
-session.close()
+
 if __name__ == "__main__":
     app.run()
