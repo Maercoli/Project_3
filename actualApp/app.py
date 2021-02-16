@@ -171,13 +171,22 @@ def get_scatter():
     Scatter_list = []
 
     with engine.connect() as con:
-        query = """SELECT "Date","Average", "Units"  FROM "Price_Houses_sold_ON_2020" """
+        query = """
+        SELECT "Average" 
+, "Units"
+, CAST("Estimated variable mortgage rate" AS FLOAT) AS "Estimated variable mortgage rate"  
+FROM "Price_Houses_sold_ON_2020" 
+INNER JOIN "Interest_rate_2020" 
+ON "Price_Houses_sold_ON_2020"."Date" = "Interest_rate_2020"."Date" 
+"""
         result = con.execute(query)
         for row in result:
-                Date = row[0]
-                Average = row[1]
-                Units = row[2]
-                Scatter_list.append({"Date": Date, "Average":Average, "Units":Units})
+                
+                Average = row[0]
+                Units = row[1]
+                Interest_rate = row[2]
+                
+                Scatter_list.append({"Average":Average, "Units":Units, "Interest_rate":Interest_rate})
     return jsonify(Scatter_list)
 
 

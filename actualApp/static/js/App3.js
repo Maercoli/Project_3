@@ -175,9 +175,10 @@ d3.json(url).then(function(data) {
   
   // parse data
   data.forEach(function(data1) {
-    data1.Date = +data1.Date;
+    //data1.Date = +data1.Date;
     data1.Average = +data1.Average;
     data1.Units = +data1.Units;
+    data1.Interest_rate = +data1.Interest_rate;
   });
 
   // xLinearScale function above csv import
